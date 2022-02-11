@@ -6,40 +6,51 @@ create table tb_produtos(
 id bigint auto_increment,
 nome varchar(255) not null,
 quantidade int,
-preco decimal,
+preco decimal not null,
 primary key (id)
 );
 
-insert into tb_produtos (nome,quantidade,preco)
-value("Maçã", 10, 1.99);
-insert into tb_produtos (nome,quantidade,preco)
-value("Banana", 13, 4.99);
-insert into tb_produtos (nome,quantidade,preco)
-value("Manga", 20, 5.49);
-insert into tb_produtos (nome,quantidade,preco)
-value("Melancia", 3, 10.00);
-insert into tb_produtos (nome,quantidade,preco)
-value("Cebola", 100, 1.50);
+insert into tb_produtos(nome, quantidade, preco)  
+values ("Maçã",100, 8.00);
+insert into tb_produtos(nome, quantidade, preco)  
+values ("Marmelada",20, 5.00);
+insert into tb_produtos(nome, quantidade, preco)  
+values ("Laranja",50, 10.00);
+insert into tb_produtos(nome, quantidade, preco)  
+values ("Aipim",200, 12.00);
+insert into tb_produtos(nome, quantidade, preco)  
+values ("Uva",1200, 30.00);
+insert into tb_produtos(nome, quantidade, preco)  
+values ("Pêssego",500, 2.90);
 
 select * from tb_produtos;
 
-update tb_produtos set preco = 1.99 where id = 1;
+select nome, preco from tb_produtos;
 
-update tb_produtos set preco = 1.99 where nome = "Maçã";
+select nome, CONCAT('R$ ',FORMAT(preco, 2,'pt_BR')) as preço from tb_produtos;
 
-delete from tb_produtos where id = 10;
+select * from tb_produtos where id = 1;
 
-insert into tb_produtos (nome, quantidade, preco)
-values ("Batata", 150, 5.50);
+select * from tb_produtos where preco > 5.00;
 
-set SQL_SAFE_UPDATES = 0;
+select * from tb_produtos where nome = "maçã";
 
-update tb_produtos set descricao = "Banana Ouro";
+select * from tb_produtos where nome = "maçã" or preco > 5.00;
 
-alter table tb_produtos modify preco decimal(8,2);
+alter table tb_produtos add descricao varchar(255); 
 
-alter table tb_produtos add descricao varchar(255);
+alter table tb_produtos modify preco decimal(6,2);
 
-alter table tb_produtos drop descricao;
+alter table tb_produtos drop descricao; 
+
+SET SQL_SAFE_UPDATES = 0;
+
+update tb_produtos set preco = 10.00 where id = 1;
+
+delete from tb_produtos where id = 16;
+
+ALTER TABLE tb_produtos ADD PRIMARY KEY (id);
+
+alter table tb_produtos change nome nomeproduto integer;
 
 delete from tb_produtos;
